@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Larias' Raiders Guide</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+    }
+
+    /* Dark Mode variables */
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: system-ui, sans-serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      background: var(--bg-color);
+      border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+    }
+
+    .doc-container {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    iframe {
+      width: 800px;
+      height: 100%;
+      border: none;
+      transition: filter 0.3s ease;
+    }
+
+    /* Magic inversion for Dark Mode */
+    body.dark-mode iframe {
+      filter: invert(0.92) hue-rotate(180deg) contrast(1.1);
+    }
+
+    /* Optional: Keep images looking normal inside the doc */
+    /* Note: Invert filter applies to the entire iframe content */
+    
+    button {
+      background: rgba(127, 127, 127, 0.15);
+      color: inherit;
+      border: 1px solid rgba(127, 127, 127, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <a href="https://buymeacoffee.com/larias" target="_blank"><button>Buy me a coffee</button></a>
+    <a href="https://www.curseforge.com/wow/addons/larias-weekly-midnight-checklist" target="_blank"><button>Addon</button></a>
+  </header>
+
+  <div class="doc-container">
+    <iframe src="https://docs.google.com/document/d/e/2PACX-1vRXH7X0Oz6uQuV20h1gfNWmbrVQTwX-NBF-y6oZ6q5uqSDBI2A0OxIzAo0hu1rLo2mbYPyh8DnEIOPg/pub?embedded=true"></iframe>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark' || 
+       (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
+</body>
+</html>
